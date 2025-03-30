@@ -22,6 +22,6 @@ Ti trovi nell'Università, ma oggi è diversa dal solito... Meglio andare al pi�
 
 ### Cronologia Versioni
 * Versione A - *Pre Release*
-    * Vedi [correzioni]()
+    * Vedi [correzioni](https://github.com/Feded0/2025-HOMEWORK-609805-605634/releases/tag/versione.A)
 * Versione base
-    * release iniziale con errori - Vedi [commit]()
+    * release iniziale con errori - Vedi [errori](https://github.com/Feded0/2025-HOMEWORK-609805-605634/releases/tag/base)
