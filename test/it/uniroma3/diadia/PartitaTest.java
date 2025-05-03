@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.ambienti.Stanza;
+import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Giocatore;
 
 /**
@@ -12,18 +13,23 @@ import it.uniroma3.diadia.giocatore.Giocatore;
  *
  * @author Feded0 (609805) e Civan04 (605634)
  * @see Partita
- * @version A
+ * @version B
  */
 
 class PartitaTest {
 	private Partita partita;
 	private Stanza stanza;
 	private Stanza stanzaVincente;
+	private Attrezzo chiaveSblocco;
 
 	@BeforeEach
 	public void setUp() {
 		partita = new Partita();
 		stanza = new Stanza("Stanza");
+		chiaveSblocco = new Attrezzo("chiave", 1);
+		
+		// Sblocchiamo la stanza vincente posando la chiave nell'atrio
+		partita.getStanzaCorrente().addAttrezzo(chiaveSblocco);
 		
 		// Otteniamo la stanza vincente spostandoci temporaneamente in essa
 		partita.setStanzaCorrente(partita.getStanzaCorrente().getStanzaAdiacente("nord")); // Biblioteca è a nord dell'Atrio
@@ -40,9 +46,16 @@ class PartitaTest {
 	}
 
 	@Test
-	public void testVinta_DopoAverImpostatoStanzaVincente() {
+	public void testVinta_DopoAverImpostatoStanzaVincenteSbloccata() {
 		partita.setStanzaCorrente(stanzaVincente);
 		assertTrue(partita.vinta());
+	}
+	
+	@Test
+	public void testVinta_DopoAverImpostatoStanzaVincenteBloccata() {
+		partita.getStanzaCorrente().removeAttrezzo(chiaveSblocco);
+		partita.setStanzaCorrente(partita.getStanzaCorrente().getStanzaAdiacente("nord"));
+		assertFalse(partita.vinta());
 	}
 
 	@Test

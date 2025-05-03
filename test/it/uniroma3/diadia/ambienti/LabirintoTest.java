@@ -11,7 +11,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  *
  * @author Feded0 (609805) e Civan04 (605634)
  * @see Labirinto
- * @version A
+ * @version B
  */
 
 class LabirintoTest {
@@ -73,9 +73,9 @@ class LabirintoTest {
 	}
 
 	@Test
-	public void testCreaStanze_AdiacenzaNordAtrio() {
-		Stanza nord = stanzaCorrente.getStanzaAdiacente("nord");
-		assertEquals("Biblioteca", nord.getNome());
+	public void testCreaStanze_AdiacenzaNordAtrioBloccata() {
+		Stanza nordBloccata = stanzaCorrente.getStanzaAdiacente("nord");
+		assertEquals("Atrio", nordBloccata.getNome());
 	}
 
 	@Test

@@ -11,7 +11,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  *
  * @author Feded0 (609805) e Civan04 (605634)
  * @see Giocatore
- * @version A
+ * @version B
  */
 
 class GiocatoreTest {

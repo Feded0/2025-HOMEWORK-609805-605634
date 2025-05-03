@@ -9,7 +9,7 @@ import it.uniroma3.diadia.giocatore.*;
  * @author  docente di POO
  * @author Modificato da Feded0 (609805) e Civan04 (605634)
  * @see Stanza
- * @version A
+ * @version B
  */
 
 public class Partita {
@@ -31,7 +31,11 @@ public class Partita {
 	public boolean vinta() {
 		return this.labirinto.getStanzaCorrente()==this.labirinto.getStanzaVincente();
 	}
-
+	
+	public boolean giocatoreIsVivo() {
+		return this.giocatore.getCfu() != 0;
+	}
+	
 	/**
 	 * Restituisce vero se e solo se la partita e' finita
 	 * @return vero se partita finita

@@ -8,23 +8,26 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  * E' collegata ad altre stanze attraverso delle uscite.
  * Ogni uscita e' associata ad una direzione.
  * 
+ * Versione creata usando visibilità delle variabili 
+ * attrezzi e numeroAttrezzi con protected 
+ * 
  * @author docente di POO 
  * @author Modificato da Feded0 (609805) e Civan04 (605634)
  * @see Attrezzo
  * @version B
 */
 
-public class Stanza {
+public class StanzaProtected {
 	
 	static final private int NUMERO_MASSIMO_DIREZIONI = 4;
 	static final private int NUMERO_MASSIMO_ATTREZZI = 10;
 	
 	private String nome;
 	
-    private Attrezzo[] attrezzi;
-    private int numeroAttrezzi;
+    protected Attrezzo[] attrezzi;
+    protected int numeroAttrezzi;
     
-    private Stanza[] stanzeAdiacenti;
+    private StanzaProtected[] stanzeAdiacenti;
     private int numeroStanzeAdiacenti;
     
 	private String[] direzioni;
@@ -33,12 +36,12 @@ public class Stanza {
      * Crea una stanza. Non ci sono stanze adiacenti, non ci sono attrezzi.
      * @param nome il nome della stanza
      */
-    public Stanza(String nome) {
+    public StanzaProtected(String nome) {
         this.nome = nome;
         this.numeroStanzeAdiacenti = 0;
         this.numeroAttrezzi = 0;
         this.direzioni = new String[NUMERO_MASSIMO_DIREZIONI];
-        this.stanzeAdiacenti = new Stanza[NUMERO_MASSIMO_DIREZIONI];
+        this.stanzeAdiacenti = new StanzaProtected[NUMERO_MASSIMO_DIREZIONI];
         this.attrezzi = new Attrezzo[NUMERO_MASSIMO_ATTREZZI];
     }
 
@@ -48,7 +51,7 @@ public class Stanza {
      * @param direzione direzione in cui sara' posta la stanza adiacente.
      * @param stanza stanza adiacente nella direzione indicata dal primo parametro.
      */
-    public void impostaStanzaAdiacente(String direzione, Stanza stanza) {
+    public void impostaStanzaAdiacente(String direzione, StanzaProtected stanza) {
         boolean aggiornato = false;
     	for(int i=0; i<this.direzioni.length; i++)
         	if (direzione.equals(this.direzioni[i])) {
@@ -67,8 +70,8 @@ public class Stanza {
      * Restituisce la stanza adiacente nella direzione specificata
      * @param direzione
      */
-	public Stanza getStanzaAdiacente(String direzione) {
-        Stanza stanza = null;
+	public StanzaProtected getStanzaAdiacente(String direzione) {
+        StanzaProtected stanza = null;
 		for(int i=0; i<this.numeroStanzeAdiacenti; i++)
         	if (this.direzioni[i].equals(direzione))
         		stanza = this.stanzeAdiacenti[i];
@@ -110,7 +113,7 @@ public class Stanza {
     /**
      * Mette un attrezzo nella stanza.
      * @param attrezzo l'attrezzo da mettere nella stanza.
-     * @return true se riesce ad aggiungere l'attrezzo, false altrimenti.
+     * @return true se riesce ad aggiungere l'attrezzo, false atrimenti.
      */
     public boolean addAttrezzo(Attrezzo attrezzo) {
         if (this.numeroAttrezzi < NUMERO_MASSIMO_ATTREZZI) {

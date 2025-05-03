@@ -11,7 +11,7 @@ import it.uniroma3.diadia.ambienti.Stanza;
  * @author  docente di POO
  * @author Modificato da Feded0 (609805) e Civan04 (605634)
  * @see Stanza
- * @version A
+ * @version B
  */
 
 public class Attrezzo {

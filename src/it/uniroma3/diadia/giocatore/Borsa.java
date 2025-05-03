@@ -11,7 +11,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  * @author Modificato da Feded0 (609805) e Civan04 (605634)
  * @see Stanza
  * @see Attrezzo
- * @version A
+ * @version B
  */
 
 public class Borsa {

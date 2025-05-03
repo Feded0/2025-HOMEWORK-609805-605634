@@ -5,10 +5,11 @@
 Ti trovi nell'Università, ma oggi è diversa dal solito... Meglio andare al più presto in **biblioteca** a studiare. Ma dov'è? I locali sono popolati da strani personaggi alcuni amici, altri... chissà! Ci sono **attrezzi** che potrebbero servirti nell'impresa: puoi raccoglierli, usarli, posarli quando ti sembrano inutili o regalarli se pensi che possano ingraziarti qualcuno.
 
 ## Comandi disponibili
+* `aiuto ` mostra un messaggio di aiuto che indica la lista dei comandi disponibili.
 * `vai   ` seleziona una direzione da seguire.
 * `prendi` prendi un oggetto indicando il nome tra quelli disponibili nella stanza.
 * `posa  ` posa un oggetto indicando il nome tra quelli disponibili nella stanza.
-* `aiuto ` mostra un messaggio di aiuto che indica la lista dei comandi disponibili.
+* `guarda` mostra un messaggio con le informazioni della stanza corrente e sullo stato della partita.
 * `fine  ` termina la partita ed esce dal gioco.
 
 ## Requisiti
@@ -21,6 +22,8 @@ Ti trovi nell'Università, ma oggi è diversa dal solito... Meglio andare al pi�
 * [Civan04](https://github.com/Civan04) - *Matricola 605634*
 
 ### Cronologia Versioni
+* Versione B - *Pre Release*
+    * Vedi [correzioni](https://github.com/Feded0/2025-HOMEWORK-609805-605634/releases/tag/versione.B)
 * Versione A - *Pre Release*
     * Vedi [correzioni](https://github.com/Feded0/2025-HOMEWORK-609805-605634/releases/tag/versione.A)
 * Versione base
