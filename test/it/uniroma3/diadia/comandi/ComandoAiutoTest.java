@@ -1,18 +1,23 @@
 package it.uniroma3.diadia.comandi;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.FileNotFoundException;
+import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.uniroma3.diadia.FormatoFileNonValidoException;
 import it.uniroma3.diadia.IOSimulator;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Labirinto;
 
 /**
  * Questa classe testa tutti i metodi della classe ComandoAiuto
  *
  * @author Feded0 (609805) e Civan04 (605634)
  * @see ComandoAiuto
- * @version B
+ * @version C
  */
 
 class ComandoAiutoTest {
@@ -22,10 +27,10 @@ class ComandoAiutoTest {
     private IOSimulator io;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws FileNotFoundException, FormatoFileNonValidoException {
         comandoAiuto = new ComandoAiuto();
-        partita = new Partita();
-        io = new IOSimulator(new String[0]);
+        partita = new Partita(Labirinto.newBuilder("LabirintoPerTest.txt").getLabirinto());
+        io = new IOSimulator(Arrays.asList());
         comandoAiuto.setIO(io);
     }
 
@@ -33,16 +38,16 @@ class ComandoAiutoTest {
     @Test
     public void testEsegui_MostraTuttiComandi() {
         comandoAiuto.esegui(partita);
-        String[] output = io.getOutput();
         
-        assertEquals(7, output.length); // 6 comandi + stringa vuota finale di a capo
-        assertEquals("aiuto", output[0]);
-        assertEquals("vai", output[1]);
-        assertEquals("prendi", output[2]);
-        assertEquals("posa", output[3]);
-        assertEquals("guarda", output[4]);
-        assertEquals("fine", output[5]);
-        assertEquals("", output[6]);
+        assertEquals("Aiuto",  		io.contieneMessaggioAtIndice(0));
+        assertEquals("Fine",  		io.contieneMessaggioAtIndice(1));
+        assertEquals("Guarda", 		io.contieneMessaggioAtIndice(2));
+        assertEquals("Interagisci", io.contieneMessaggioAtIndice(3));
+        assertEquals("Posa",   		io.contieneMessaggioAtIndice(4));
+        assertEquals("Prendi", 		io.contieneMessaggioAtIndice(5));
+        assertEquals("Regala",    	io.contieneMessaggioAtIndice(6));
+        assertEquals("Saluta",    	io.contieneMessaggioAtIndice(7));
+        assertEquals("Vai",    		io.contieneMessaggioAtIndice(8));
     }
 
     /* TEST per get */
@@ -58,9 +63,9 @@ class ComandoAiutoTest {
 
     /* TEST per setParametro */
     @Test
-    public void testSetParametro_NonFaNiente() {
+    public void testSetParametro_Uguale() {
         comandoAiuto.setParametro("qualunque");
-        assertNull(comandoAiuto.getParametro());
+        assertEquals("qualunque", comandoAiuto.getParametro());
     }
 
 }

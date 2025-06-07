@@ -1,0 +1,11 @@
+Stanze:Ingresso,Salone,Studio,Torre,Cantina,Segreta
+Magica:Torre
+Buia:Cantina torcia
+Bloccata:Studio est specchio
+Inizio:Ingresso
+Vincente:Segreta
+Mago:Torre Merlino Benvenuto! pergamena 1
+Cane:Cantina Fido Grrr...
+Strega:Studio Morgana Vai!
+Attrezzi:torcia 1 Ingresso, chiave 1 Cantina, specchio 2 Salone, libro 1 Studio
+Uscite:Ingresso nord Salone,Salone sud Ingresso,Salone est Studio,Studio ovest Salone,Studio est Segreta,Segreta ovest Studio,Salone nord Torre,Torre sud Salone,Salone ovest Cantina,Cantina est Salone

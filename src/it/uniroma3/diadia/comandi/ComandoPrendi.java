@@ -2,30 +2,30 @@ package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
-import it.uniroma3.diadia.IO;
 
 /**
  * Classe che gestisce il comando prendi 
  * 
  * @author docente di POO 
  * @author Modificato da Feded0 (609805) e Civan04 (605634)
- * @see FabbricaDiComandiFisarmonica
- * @version B
+ * @see FabbricaDiComandiRiflessiva
+ * @see AbstractComando
+ * @version C
 */
 
-public class ComandoPrendi implements Comando {
-	private IO io;
+public class ComandoPrendi extends AbstractComando {
 	private String nomeAttrezzo;
 	
 	/**
 	 * Prende un oggetto (se presente) dalla stanza corrente 
 	 * e lo aggiunge alla borsa (se libera) 
 	 * 
-	 * @param nomeAttrezzo
+	 * @param partita
 	 */
 	@Override
 	public void esegui (Partita partita) {
-
+		nomeAttrezzo = getParametro();
+		
 		if(nomeAttrezzo==null) {
 			io.mostraMessaggio("Nessun attrezzo inserito");
 		}
@@ -52,26 +52,6 @@ public class ComandoPrendi implements Comando {
 	}
 	
 	/**
-	 * Override per impostare il parametro corrente
-	 * 
-	 * @param parametro stringa dell'eventuale parametro
-	 */
-	@Override
-	public void setParametro (String parametro) {
-		this.nomeAttrezzo = parametro;
-	}
-	
-	/**
-	 * Override per impostare la console dal main
-	 * 
-	 * @param io console istanziata nel main
-	 */
-	@Override
-	public void setIO(IO io) {
-		this.io = io;
-	}
-	
-	/**
 	 * Override per ottenere il nome del comando corrente
 	 * 
 	 * @return stringa che identifica il nome del comando
@@ -79,16 +59,6 @@ public class ComandoPrendi implements Comando {
 	@Override
 	public String getNome() {
 		return "prendi";
-	}
-	
-	/**
-	 * Override per ottenere il nome del parametro corrente
-	 * 
-	 * @return stringa che identifica il nome del parametro
-	 */
-	@Override
-	public String getParametro() {
-		return this.nomeAttrezzo;
 	}
 	
 }

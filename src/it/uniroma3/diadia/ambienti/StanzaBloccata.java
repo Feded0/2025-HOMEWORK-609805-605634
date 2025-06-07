@@ -7,12 +7,12 @@ package it.uniroma3.diadia.ambienti;
  *
  * @author Feded0 (609805) e Civan04 (605634)
  * @see Stanza
- * @version B
+ * @version C
  */
 
 public class StanzaBloccata extends Stanza {
-	String direzioneBloccata;
-	String attrSblocco;
+	private Direzione direzioneBloccata;
+	private String attrSblocco;
 	
 	/**
      * Costruttore per la stanza bloccata
@@ -21,7 +21,7 @@ public class StanzaBloccata extends Stanza {
      * @param direzioneBloccata la direzione non accessibile
      * @param attrSblocco l'attrezzo di sblocco
      */
-	public StanzaBloccata(String nome, String direzioneBloccata, String attrSblocco) {
+	public StanzaBloccata(String nome, Direzione direzioneBloccata, String attrSblocco) {
 		super(nome);
 		this.direzioneBloccata = direzioneBloccata;
 		this.attrSblocco = attrSblocco;
@@ -35,7 +35,7 @@ public class StanzaBloccata extends Stanza {
      * @return stanza corrente se direzione bloccata, stanza adiacente altrimenti
      */
 	@Override
-	public Stanza getStanzaAdiacente(String direzione) {
+	public Stanza getStanzaAdiacente(Direzione direzione) {
 		if(direzione.equals(this.direzioneBloccata)&&!(this.hasAttrezzo(this.attrSblocco))) {
 			return this;
 		}

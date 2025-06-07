@@ -1,0 +1,11 @@
+Stanze:Atrio,AulaN11,AulaN10,LaboratorioCampus,Biblioteca
+Magica:AulaN11
+Buia: LaboratorioCampus lanterna
+Bloccata: Atrio nord chiave
+Inizio:Atrio
+Vincente:Biblioteca
+Mago: 
+Cane: 
+Strega:
+Attrezzi:lanterna 3 AulaN10, osso 1 Atrio, chiave 1 LaboratorioCampus, martello 4 LaboratorioCampus
+Uscite:Atrio nord Biblioteca,Atrio est AulaN11,Atrio sud AulaN10,Atrio ovest LaboratorioCampus,AulaN11 est LaboratorioCampus,AulaN11 ovest Atrio,AulaN10 nord Atrio,AulaN10 est AulaN11,AulaN10 ovest LaboratorioCampus,LaboratorioCampus est Atrio,LaboratorioCampus ovest AulaN11,Biblioteca sud Atrio

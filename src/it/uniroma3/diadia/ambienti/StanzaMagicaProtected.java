@@ -14,7 +14,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  * @author docente di POO
  * @author Modificato da Feded0 (609805) e Civan04 (605634)
  * @see StanzaProtected
- * @version B
+ * @version C
  */
 
 public class StanzaMagicaProtected extends StanzaProtected {

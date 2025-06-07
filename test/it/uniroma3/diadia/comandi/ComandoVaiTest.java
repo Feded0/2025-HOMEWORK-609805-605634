@@ -1,11 +1,17 @@
 package it.uniroma3.diadia.comandi;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.FileNotFoundException;
+import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.uniroma3.diadia.FormatoFileNonValidoException;
 import it.uniroma3.diadia.IOSimulator;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Direzione;
+import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
 
 /**
@@ -13,7 +19,7 @@ import it.uniroma3.diadia.ambienti.Stanza;
  *
  * @author Feded0 (609805) e Civan04 (605634)
  * @see ComandoVai
- * @version B
+ * @version C
  */
 
 class ComandoVaiTest {
@@ -25,17 +31,17 @@ class ComandoVaiTest {
     private IOSimulator io;
     
     @BeforeEach
-    public void setUp() {
-        io = new IOSimulator(new String[0]);
-        partita = new Partita();
+    public void setUp() throws FileNotFoundException, FormatoFileNonValidoException {
+        io = new IOSimulator(Arrays.asList());
+        partita = new Partita(Labirinto.newBuilder("LabirintoPerTest.txt").getLabirinto());
         comandoVai = new ComandoVai();
         comandoVai.setIO(io);
         
         atrio = new Stanza("Atrio");
         biblioteca = new Stanza("Biblioteca");
         
-        atrio.impostaStanzaAdiacente("nord", biblioteca);
-        biblioteca.impostaStanzaAdiacente("sud", atrio);
+        atrio.impostaStanzaAdiacente(Direzione.nord, biblioteca);
+        biblioteca.impostaStanzaAdiacente(Direzione.sud, atrio);
         
         partita.setStanzaCorrente(atrio);
     }

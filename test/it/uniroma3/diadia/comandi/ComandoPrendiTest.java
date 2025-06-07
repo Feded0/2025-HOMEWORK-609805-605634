@@ -1,11 +1,16 @@
 package it.uniroma3.diadia.comandi;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.FileNotFoundException;
+import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.uniroma3.diadia.FormatoFileNonValidoException;
 import it.uniroma3.diadia.IOSimulator;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
@@ -15,7 +20,7 @@ import it.uniroma3.diadia.giocatore.Borsa;
  *
  * @author Feded0 (609805) e Civan04 (605634)
  * @see ComandoPrendi
- * @version B
+ * @version C
  */
 
 class ComandoPrendiTest {
@@ -27,10 +32,10 @@ class ComandoPrendiTest {
     private Attrezzo attrezzoTest;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws FileNotFoundException, FormatoFileNonValidoException {
         comandoPrendi = new ComandoPrendi();
-        partita = new Partita();
-        io = new IOSimulator(new String[0]);
+        partita = new Partita(Labirinto.newBuilder("LabirintoPerTest.txt").getLabirinto());
+        io = new IOSimulator(Arrays.asList());
         comandoPrendi.setIO(io);
         
         stanza = new Stanza("Stanza Test");
@@ -124,8 +129,8 @@ class ComandoPrendiTest {
         comandoPrendi.setParametro("osso");
         comandoPrendi.esegui(partita);
         
-        assertTrue(io.contieneMessaggio("osso aggiunto all'inventario"));
-        assertEquals("osso", partita.getGiocatoreBorsa().getAttrezzo("osso").getNome());
+        assertFalse(io.contieneMessaggio("osso aggiunto all'inventario"));
+        assertEquals("osso (2kg)", partita.getGiocatoreBorsa().getAttrezzo("osso").toString());
     }
 
     @Test
@@ -140,7 +145,7 @@ class ComandoPrendiTest {
         
         assertTrue(partita.getGiocatoreBorsa().hasAttrezzo("osso"));
         assertTrue(partita.getGiocatoreBorsa().hasAttrezzo("lanterna"));
-        assertNull(stanza.getAttrezzi()[0]);
+        assertTrue(stanza.isEmpty());
     }
 
     @Test

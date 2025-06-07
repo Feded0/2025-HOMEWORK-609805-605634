@@ -7,7 +7,7 @@ package it.uniroma3.diadia.ambienti;
  *
  * @author Feded0 (609805) e Civan04 (605634)
  * @see Stanza
- * @version B
+ * @version C
  */
 
 public class StanzaBuia extends Stanza {

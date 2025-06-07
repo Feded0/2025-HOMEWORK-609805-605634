@@ -6,10 +6,10 @@ import it.uniroma3.diadia.IO;
 /**
  * Interfaccia che gestisce l'esecuzione e i parametri dei vari comandi
  *
- * @author  docente di POO
+ * @author docente di POO
  * @author Modificato da Feded0 (609805) e Civan04 (605634)
- * @see FabbricaDiComandi
- * @version B
+ * @see FabbricaDiComandiRiflessiva
+ * @version C
  */
 
 public interface Comando {

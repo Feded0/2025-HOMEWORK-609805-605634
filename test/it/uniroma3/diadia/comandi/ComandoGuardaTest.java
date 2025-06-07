@@ -1,11 +1,16 @@
 package it.uniroma3.diadia.comandi;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.FileNotFoundException;
+import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.uniroma3.diadia.FormatoFileNonValidoException;
 import it.uniroma3.diadia.IOSimulator;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
@@ -15,7 +20,7 @@ import it.uniroma3.diadia.giocatore.Borsa;
  *
  * @author Feded0 (609805) e Civan04 (605634)
  * @see ComandoGuarda
- * @version B
+ * @version C
  */
 
 class ComandoGuardaTest {
@@ -25,10 +30,10 @@ class ComandoGuardaTest {
     private IOSimulator io;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws FileNotFoundException, FormatoFileNonValidoException {
         comandoGuarda = new ComandoGuarda();
-        partita = new Partita();
-        io = new IOSimulator(new String[0]);
+        partita = new Partita(Labirinto.newBuilder("LabirintoPerTest.txt").getLabirinto());
+        io = new IOSimulator(Arrays.asList());
         comandoGuarda.setIO(io);
     }
 
@@ -83,8 +88,47 @@ class ComandoGuardaTest {
     @Test
     public void testEsegui_OutputContieneEsattamenteTreMessaggi() {
         comandoGuarda.esegui(partita);
-        String[] output = io.getOutput();
-        assertEquals(3, output.length);
+        assertNotNull(io.contieneMessaggioAtIndice(0));
+        assertNotNull(io.contieneMessaggioAtIndice(1));
+        assertNotNull(io.contieneMessaggioAtIndice(2));
+    }
+    
+
+    @Test
+    public void testEseguiGuardaBorsa_Vuota() {
+        this.comandoGuarda.setParametro("borsa");
+        this.comandoGuarda.esegui(partita);
+        assertTrue(io.contieneMessaggio("Borsa vuota"));
+    }
+
+    @Test
+    public void testEseguiGuardaBorsa_ConUnAttrezzo() {
+        partita.getGiocatoreBorsa().addAttrezzo(new Attrezzo("spada", 3));
+        this.comandoGuarda.setParametro("borsa");
+        this.comandoGuarda.esegui(partita);
+        assertTrue(io.contieneMessaggio("spada"));
+        assertTrue(io.contieneMessaggio("[Contenuto Borsa]"));
+    }
+
+    @Test
+    public void testEseguiGuardaBorsa_ConAttrezziOrdinatiPerPeso() {
+        partita.getGiocatoreBorsa().addAttrezzo(new Attrezzo("lanterna", 2));
+        partita.getGiocatoreBorsa().addAttrezzo(new Attrezzo("spada", 5));
+        this.comandoGuarda.setParametro("borsa");
+        this.comandoGuarda.esegui(partita);
+        assertTrue(io.contieneMessaggio("lanterna") && io.contieneMessaggio("spada"));
+        assertTrue(io.contieneMessaggio("Ordinamento per peso"));
+        assertTrue(io.contieneMessaggio("Ordinamento per nome"));
+        assertTrue(io.contieneMessaggio("Raggruppamento per peso"));
+    }
+
+    @Test
+    public void testEseguiGuardaBorsa_ParametroCaseInsensitive() {
+        partita.getGiocatoreBorsa().addAttrezzo(new Attrezzo("chiave", 1));
+        this.comandoGuarda.setParametro("BoRsA");
+        this.comandoGuarda.esegui(partita);
+        assertTrue(io.contieneMessaggio("chiave"));
+        assertTrue(io.contieneMessaggio("[Contenuto Borsa]"));
     }
     
     /* TEST per get */
@@ -100,9 +144,9 @@ class ComandoGuardaTest {
 
     /* TEST per setParametro */
     @Test
-    public void testSetParametro_NonHaEffetti() {
+    public void testSetParametro_Uguale() {
         comandoGuarda.setParametro("qualunque");
-        assertNull(comandoGuarda.getParametro());
+        assertEquals("qualunque", comandoGuarda.getParametro());
     }
     
 }

@@ -1,9 +1,14 @@
 package it.uniroma3.diadia;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.FileNotFoundException;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.uniroma3.diadia.ambienti.Direzione;
+import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Giocatore;
@@ -13,7 +18,7 @@ import it.uniroma3.diadia.giocatore.Giocatore;
  *
  * @author Feded0 (609805) e Civan04 (605634)
  * @see Partita
- * @version B
+ * @version C
  */
 
 class PartitaTest {
@@ -23,20 +28,11 @@ class PartitaTest {
 	private Attrezzo chiaveSblocco;
 
 	@BeforeEach
-	public void setUp() {
-		partita = new Partita();
+	public void setUp() throws FileNotFoundException, FormatoFileNonValidoException {
+		partita = new Partita(Labirinto.newBuilder("LabirintoPerTest.txt").getLabirinto());
 		stanza = new Stanza("Stanza");
 		chiaveSblocco = new Attrezzo("chiave", 1);
-		
-		// Sblocchiamo la stanza vincente posando la chiave nell'atrio
-		partita.getStanzaCorrente().addAttrezzo(chiaveSblocco);
-		
-		// Otteniamo la stanza vincente spostandoci temporaneamente in essa
-		partita.setStanzaCorrente(partita.getStanzaCorrente().getStanzaAdiacente("nord")); // Biblioteca è a nord dell'Atrio
-		stanzaVincente = partita.getStanzaCorrente();
-
-		// Torniamo all'atrio iniziale
-		partita.setStanzaCorrente(stanzaVincente.getStanzaAdiacente("sud"));
+		stanzaVincente = partita.getLabirinto().getStanzaVincente();
 	}
 
 	/* TEST per vinta */
@@ -54,7 +50,7 @@ class PartitaTest {
 	@Test
 	public void testVinta_DopoAverImpostatoStanzaVincenteBloccata() {
 		partita.getStanzaCorrente().removeAttrezzo(chiaveSblocco);
-		partita.setStanzaCorrente(partita.getStanzaCorrente().getStanzaAdiacente("nord"));
+		partita.setStanzaCorrente(partita.getStanzaCorrente().getStanzaAdiacente(Direzione.nord));
 		assertFalse(partita.vinta());
 	}
 

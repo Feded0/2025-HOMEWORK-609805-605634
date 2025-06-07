@@ -11,7 +11,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  *
  * @author Feded0 (609805) e Civan04 (605634)
  * @see Giocatore
- * @version B
+ * @version C
  */
 
 class GiocatoreTest {
@@ -87,7 +87,7 @@ class GiocatoreTest {
 	public void testGetBorsa_RimuoviAttrezzo() {
 		Attrezzo attrezzo = new Attrezzo("osso", 1);
 		giocatore.getBorsa().addAttrezzo(attrezzo);
-		giocatore.getBorsa().removeAttrezzo(attrezzo);
+		giocatore.getBorsa().removeAttrezzo(attrezzo.getNome());
 		assertFalse(giocatore.getBorsa().hasAttrezzo("osso"));
 	}
 

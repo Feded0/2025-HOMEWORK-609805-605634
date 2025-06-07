@@ -1,18 +1,23 @@
 package it.uniroma3.diadia.comandi;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.FileNotFoundException;
+import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.uniroma3.diadia.FormatoFileNonValidoException;
 import it.uniroma3.diadia.IOSimulator;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Labirinto;
 
 /**
  * Questa classe testa tutti i metodi della classe ComandoFine
  *
  * @author Feded0 (609805) e Civan04 (605634)
  * @see ComandoFine
- * @version B
+ * @version C
  */
 
 class ComandoFineTest {
@@ -22,10 +27,10 @@ class ComandoFineTest {
     private IOSimulator io;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws FileNotFoundException, FormatoFileNonValidoException {
         comandoFine = new ComandoFine();
-        partita = new Partita();
-        io = new IOSimulator(new String[0]);
+        partita = new Partita(Labirinto.newBuilder("LabirintoPerTest.txt").getLabirinto());
+        io = new IOSimulator(Arrays.asList());
         comandoFine.setIO(io);
     }
 
@@ -64,9 +69,9 @@ class ComandoFineTest {
 
     /* TEST per setParametro */
     @Test
-    public void testSetParametro_NonFaNiente() {
+    public void testSetParametro_Uguale() {
         comandoFine.setParametro("qualunque");
-        assertNull(comandoFine.getParametro());
+        assertEquals("qualunque", comandoFine.getParametro());
     }
     
 }

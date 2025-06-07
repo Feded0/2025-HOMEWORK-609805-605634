@@ -8,13 +8,13 @@ import it.uniroma3.diadia.ambienti.Stanza;
  * del labirinto.
  * Ogni attrezzo ha un nome ed un peso.
  *
- * @author  docente di POO
+ * @author docente di POO
  * @author Modificato da Feded0 (609805) e Civan04 (605634)
  * @see Stanza
- * @version B
+ * @version C
  */
 
-public class Attrezzo {
+public class Attrezzo implements Comparable<Attrezzo> {
 
 	private String nome;
 	private int peso;
@@ -51,6 +51,27 @@ public class Attrezzo {
 	 */
 	public String toString() {
 		return this.getNome()+" ("+this.getPeso()+"kg)";
+	}
+	
+	@Override
+	public int compareTo(Attrezzo that) {
+		return this.getNome().compareTo(that.getNome());
+	}
+	
+	@Override
+	public int hashCode() {
+		return this.nome.hashCode()+this.peso;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		
+		Attrezzo that = (Attrezzo) obj;
+		return this.getNome().equals(that.getNome()) && this.getPeso()==that.getPeso();
 	}
 
 }

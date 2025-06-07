@@ -6,10 +6,10 @@ import it.uniroma3.diadia.giocatore.*;
 /**
  * Questa classe modella una partita del gioco
  *
- * @author  docente di POO
+ * @author docente di POO
  * @author Modificato da Feded0 (609805) e Civan04 (605634)
  * @see Stanza
- * @version B
+ * @version C
  */
 
 public class Partita {
@@ -18,11 +18,12 @@ public class Partita {
 	private Labirinto labirinto;
 	private boolean finita;
 	
-	public Partita(){
+	public Partita(Labirinto l){
 		this.giocatore = new Giocatore();
-		this.labirinto = new Labirinto();
+		this.labirinto = l;
 		this.finita = false;
 	}
+	
 	
 	/**
 	 * Restituisce vero se e solo se la partita e' stata vinta
@@ -82,6 +83,14 @@ public class Partita {
 	 */
 	public Stanza getStanzaCorrente() {
 		return this.labirinto.getStanzaCorrente();
+	}
+	
+	/**
+	 * Metodo getter per il labirinto
+	 * @return il labirinto
+	 */
+	public Labirinto getLabirinto() {
+		return this.labirinto;
 	}
 	
 }

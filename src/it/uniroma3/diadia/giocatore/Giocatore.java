@@ -1,21 +1,18 @@
 package it.uniroma3.diadia.giocatore;
 
-import it.uniroma3.diadia.ambienti.Stanza;
-import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.Configuratore;
 
 /**
  * Questa classe modella la gestione dei cfu del Giocatore
  *
- * @author  docente di POO
+ * @author docente di POO
  * @author Modificato da Feded0 (609805) e Civan04 (605634)
- * @see Stanza
- * @see Attrezzo
- * @version B
+ * @version C
  */
 
 public class Giocatore {
 	
-	static final private int CFU_INIZIALI = 20;
+	static final private int CFU_INIZIALI = Configuratore.getCFU();
 	
 	private int cfu;
 	private Borsa borsa;

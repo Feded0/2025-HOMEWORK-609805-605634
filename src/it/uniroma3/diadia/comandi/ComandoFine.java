@@ -8,30 +8,22 @@ import it.uniroma3.diadia.IO;
  * 
  * @author docente di POO 
  * @author Modificato da Feded0 (609805) e Civan04 (605634)
- * @see FabbricaDiComandiFisarmonica
- * @version B
+ * @see FabbricaDiComandiRiflessiva
+ * @see AbstractComando
+ * @version C
 */
 
-public class ComandoFine implements Comando {
-	private IO io;
+public class ComandoFine extends AbstractComando {
 
 	/**
-	 * Comando "Fine".
+	 * Comando fine che termina immediatamente la partita
+	 * 
+	 * @param partita
 	 */
 	@Override
 	public void esegui (Partita partita) {
 		io.mostraMessaggio("Grazie di aver giocato!"); // si desidera smettere
 		partita.setFinita();
-	}
-
-	/**
-	 * Override per impostare il parametro corrente
-	 * 
-	 * @param parametro stringa dell'eventuale parametro
-	 */
-	@Override
-	public void setParametro (String parametro) {
-		//Nessun parametro richiesto
 	}
 
 	/**
@@ -52,16 +44,6 @@ public class ComandoFine implements Comando {
 	@Override
 	public String getNome() {
 		return "fine";
-	}
-	
-	/**
-	 * Override per ottenere il nome del parametro corrente
-	 * 
-	 * @return stringa che identifica il nome del parametro
-	 */
-	@Override
-	public String getParametro() {
-		return null;
 	}
 	
 }

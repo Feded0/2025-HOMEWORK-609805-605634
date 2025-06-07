@@ -1,5 +1,9 @@
 package it.uniroma3.diadia;
 
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+
 /**
  * Questa classe permette di creare un simulatore di console,
  * da utilizzare nei test per emulare input del giocatore e
@@ -7,64 +11,50 @@ package it.uniroma3.diadia;
  *
  * @author Feded0 (609805) e Civan04 (605634)
  * @see IOConsole
- * @version B
+ * @version C
  */
 
 public class IOSimulator implements IO {
 
-	private String[] input;
+	private List<String> input;
 	private int indiceInput;
+	
+	private Map<Integer, String> output;
+	private Integer indiceOutput;
 
-	private String[] output;
-	private int indiceOutput;
-
-	public IOSimulator(String[] inputUtente) {
+	public IOSimulator(List<String> inputUtente) {
 		this.input = inputUtente;
 		this.indiceInput = 0;
-		this.output = new String[10]; //Dimensione output iniziale di 10
+		
+		this.output = new HashMap<Integer, String>();
 		this.indiceOutput = 0;
 	}
 
 	/**
-	 * Legge dall'array di istruzioni passato nel costruttore
+	 * Legge dalla lista di istruzioni passato nel costruttore
 	 * la successiva istruzione da eseguire
 	 *
 	 * @return stringa da eseguire, oppure la stringa "fine" 
-	 * 			se è stato visitato tutto l'array
+	 * 			se è stato visitata tutta la lista
 	 */
 	@Override
 	public String leggiRiga() {
-	    if (indiceInput >= input.length) {
+	    if (indiceInput >= input.size()) {
 	        return "fine"; //Forza esplicitamente il comando di terminazione 
 	        			   //se non viene passato nell'input della stringa dei comandi
 	    }
-	    return this.input[indiceInput++];
+	    return this.input.get(indiceInput++);
 	}
 
 	/**
-	 * Salva la stringa che dovrebbe essere mostrata in console in un array
+	 * Salva la stringa che dovrebbe essere mostrata in console in una mappa
 	 * 
 	 * @param stringa da salvare
 	 */
 	@Override
 	public void mostraMessaggio(String msg) {
-		if(indiceOutput>=output.length) {
-			espandiArrayOutput();
-		}
-		this.output[indiceOutput++] = msg;
+		this.output.put(indiceOutput++, msg);
 	}
-	
-	/**
-	 * Raddoppia la dimensione dell'array nel caso sia stato riempito
-	 */
-	private void espandiArrayOutput() {
-        String[] nuovoOutput = new String[output.length * 2];
-        
-        for (int i = 0; i < output.length; i++) {
-            nuovoOutput[i] = output[i];
-        }
-        output = nuovoOutput;
-    }
 	
 	/**
 	 * Verifica se la stringa ricevuta è presente fra tutte le stringhe
@@ -73,28 +63,24 @@ public class IOSimulator implements IO {
 	 * @param stringa da verificre
 	 */
 	public boolean contieneMessaggio(String messaggio) {
-        this.output = getOutput();
 		
-		for(String s : this.output) {
-            if(s.contains(messaggio)) return true;
-        }
-        return false;
+		for (String msg : this.output.values()) {
+	        if (msg.contains(messaggio)) {
+	            return true;
+	        }
+	    }
+	    return false;
     }
 	
 	/**
-	 * Ricopia le stringhe di output in un nuovo array di output rimuovendo eventuali 
-	 * null finali (per via del raddoppiamento della dimensione dell'array), quindi 
-	 * permette di ottenere l'output completo di tutti i messaggi stampati in console
-	 *
-	 * @return array di stringhe
+	 * Verifica se all'indice specificato nella
+	 * mappa è presente una certa stringa
+	 * 
+	 * @param intero rappresentante l'indice
+	 * @return la stringa corrispettiva
 	 */
-	public String[] getOutput() {
-		String[] output = new String[indiceOutput];
-		
-		for(int i=0; i<indiceOutput; i++) {
-			output[i] = this.output[i];
-		}
-		return output;
+	public String contieneMessaggioAtIndice(Integer indice) {
+		return this.output.get(indice);
 	}
 	
 }

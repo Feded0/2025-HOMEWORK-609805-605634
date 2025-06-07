@@ -1,6 +1,8 @@
 package it.uniroma3.diadia.comandi;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +13,7 @@ import it.uniroma3.diadia.IOSimulator;
  *
  * @author Feded0 (609805) e Civan04 (605634)
  * @see FabbricaDiComandiFisarmonica
- * @version B
+ * @version C
  */
 
 class FabbricaDiComandiFisarmonicaTest {
@@ -21,7 +23,7 @@ class FabbricaDiComandiFisarmonicaTest {
 
     @BeforeEach
     public void setUp() {
-        io = new IOSimulator(new String[0]);
+        io = new IOSimulator(Arrays.asList());
         fabbrica = new FabbricaDiComandiFisarmonica(io);
     }
 
